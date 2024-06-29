@@ -15,13 +15,14 @@ class BasePreferenceCommand(Command):
     def __init__(self, scope: Scope, parameter_group_path: str):
         self.parameter_group = get_parameter_group(scope, parameter_group_path)
         self.scope = scope
+        self.parameter_group_path = parameter_group_path
     
     @property
     def _executable(self) -> Callable:
         return get_freecad_method(self.parameter_group, self._method_name)
     
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()})"
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group_path})"
 
 class GetContent(BasePreferenceCommand):
 
@@ -36,7 +37,7 @@ class GetContent(BasePreferenceCommand):
         return self._executable()
     
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()})"
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group_path})"
 
 
 class PreferenceCommand(BasePreferenceCommand):
@@ -55,7 +56,7 @@ class PreferenceCommand(BasePreferenceCommand):
         return get_freecad_method(self.parameter_group, self._method_name)
     
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()})"
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group_path})"
 
 
 class GetPreference(PreferenceCommand):
@@ -69,7 +70,7 @@ class GetPreference(PreferenceCommand):
         return self._executable(self.name)
     
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()}.{self.name})"
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group_path}.{self.name})"
 
 
 class ListPreferences(PreferenceCommand):
@@ -96,7 +97,7 @@ class AddPreference(PreferenceCommand):
         FreeCAD.saveParameter()
     
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()}.{self.name}, {self.value})"
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group_path}.{self.name}, {self.value})"
 
 
 class UpdatePreference(AddPreference):...
@@ -114,4 +115,4 @@ class DeletePreference(PreferenceCommand):
         FreeCAD.saveParameter()
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()}.{self.name})"
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group_path}.{self.name})"
