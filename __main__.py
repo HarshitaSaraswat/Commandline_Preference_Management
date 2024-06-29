@@ -10,5 +10,8 @@ output = output.split(START_FLAG)[-1]
 output = output.split(EXIT_FLAG)[0]
 if ERROR_FLAG in output:
     output = output.split(ERROR_FLAG)[-1]
+    print(output)
+    exit(1)
     
 print(output)
+exit(0)
