@@ -9,9 +9,9 @@ class CommandLineInterface:
         print("runnningg with args=", self.args)
     
     def test_run(self):
-        print("77777777777777777777777777777777777777777777777777--------------------------------------------")
+        # print("77777777777777777777777777777777777777777777777777--------------------------------------------")
         x=FreeCAD.ParamGet("User parameter:BaseApp/Preferences/OpenGL")
-        print(x)
+        # print(x)
         
         print(x.GetContents())
 

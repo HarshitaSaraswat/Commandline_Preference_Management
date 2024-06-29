@@ -7,7 +7,7 @@ def main():
     cli = CommandLineInterface(sys.argv[1:])
     cli.run()
     cli.test_run()
-    cli.text_exception()
+    # cli.text_exception()
 
 try:
     print(START_FLAG)
