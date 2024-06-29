@@ -16,10 +16,18 @@ class PreferenceCommand(Command):
     def __init__(self, scope: Scope, parameter_group_path: str, dtype: DType):
         self.parameter_group = get_parameter_group(scope, parameter_group_path)
         self.dtype = dtype
+        self.scope = scope
+    
+    @property
+    def _method_name(self):
+        return f"{self._method_prefix}{self.dtype}"
 
     @property
-    def __executable(self) -> Callable:
-        return get_freecad_method(self.parameter_group, f"{self._method_prefix}{self.dtype}")
+    def _executable(self) -> Callable:
+        return get_freecad_method(self.parameter_group, self._method_name)
+    
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()})"
 
 
 class GetPreference(PreferenceCommand):
@@ -30,18 +38,21 @@ class GetPreference(PreferenceCommand):
         self.name = name
 
     def execute(self):
-        return self.__executable(self.name)
+        return self._executable(self.name)
+    
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()}.{self.name})"
 
 
 class ListPreferences(PreferenceCommand):
     _method_prefix = "Get"
 
     @property
-    def __executable(self) -> Callable:
-        return get_freecad_method(self.parameter_group, f"{self._method_prefix}{self.dtype}s")
+    def _method_name(self):
+        return f"{self._method_prefix}{self.dtype}s"
     
     def execute(self):
-        return self.__executable()
+        return self._executable()
 
 
 class AddPreference(PreferenceCommand):
@@ -53,8 +64,11 @@ class AddPreference(PreferenceCommand):
         self.value = value
 
     def execute(self):
-        self.__executable(self.name, self.value)
+        self._executable(self.name, self.value)
         FreeCAD.saveParameter()
+    
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()}.{self.name}, {self.value})"
 
 
 class UpdatePreference(AddPreference):...
@@ -68,5 +82,8 @@ class DeletePreference(PreferenceCommand):
         self.name = name
 
     def execute(self):
-        self.__executable(self.name)
+        self._executable(self.name)
         FreeCAD.saveParameter()
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.scope}: {self.parameter_group.GetGroupName()}.{self.name})"
