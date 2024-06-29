@@ -1,5 +1,5 @@
-from Commandline_Preference_Management.src.commands import GetPreference, AddPreference, UpdatePreference, DeletePreference, ListPreferences
-from Commandline_Preference_Management.src.constants import Scope, DType
+from src.commands import GetPreference, AddPreference, UpdatePreference, DeletePreference, ListPreferences
+from src.constants import Scope, DType
 
 
 cmd = AddPreference(Scope.User, "BaseApp/Preferences/OpenGL", "my", 89, DType.Int)

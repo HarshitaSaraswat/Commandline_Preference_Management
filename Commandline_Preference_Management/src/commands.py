@@ -18,7 +18,7 @@ class PreferenceCommand(Command):
         self.dtype = dtype
 
     @property
-    def executable(self) -> Callable:
+    def __executable(self) -> Callable:
         return get_freecad_method(self.parameter_group, f"{self._method_prefix}{self.dtype}")
 
 
@@ -30,18 +30,18 @@ class GetPreference(PreferenceCommand):
         self.name = name
 
     def execute(self):
-        return self.executable(self.name)
+        return self.__executable(self.name)
 
 
 class ListPreferences(PreferenceCommand):
     _method_prefix = "Get"
 
     @property
-    def executable(self) -> Callable:
+    def __executable(self) -> Callable:
         return get_freecad_method(self.parameter_group, f"{self._method_prefix}{self.dtype}s")
     
     def execute(self):
-        return self.executable()
+        return self.__executable()
 
 
 class AddPreference(PreferenceCommand):
@@ -53,7 +53,7 @@ class AddPreference(PreferenceCommand):
         self.value = value
 
     def execute(self):
-        self.executable(self.name, self.value)
+        self.__executable(self.name, self.value)
         FreeCAD.saveParameter()
 
 
@@ -68,5 +68,5 @@ class DeletePreference(PreferenceCommand):
         self.name = name
 
     def execute(self):
-        self.executable(self.name)
+        self.__executable(self.name)
         FreeCAD.saveParameter()
