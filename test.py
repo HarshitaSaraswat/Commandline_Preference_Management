@@ -7,7 +7,9 @@ from Commandline_Preference_Management.src.commands import GetContent, GetPrefer
 from Commandline_Preference_Management.src.constants import Scope, DType
 from Commandline_Preference_Management.src.invoker import PreferenceCommandInvoker
 
-invoker = PreferenceCommandInvoker(True)
+invoker = PreferenceCommandInvoker(
+    verbose=True,
+)
 
 
 cmd = AddPreference(Scope.User, "BaseApp/Preferences/OpenGL", "my", 89, DType.Int)
