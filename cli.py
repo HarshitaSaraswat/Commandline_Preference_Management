@@ -6,8 +6,6 @@ def main():
     from Commandline_Preference_Management.src.interface import CommandLineInterface
     cli = CommandLineInterface(sys.argv[1:])
     cli.run()
-    cli.test_run()
-    # cli.text_exception()
 
 try:
     print(START_FLAG)

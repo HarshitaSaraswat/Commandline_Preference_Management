@@ -1,8 +1,23 @@
 import subprocess
 import sys
+import shutil
 from flags import START_FLAG, ERROR_FLAG, EXIT_FLAG
 
-command = f"FreeCADCmd cli.py {' '.join(sys.argv[1:])}"
+FREECAD_COMMANDS = ("freecadcmd", "FreeCADCmd")
+
+fc_command = next(
+    (command for command in FREECAD_COMMANDS if shutil.which(command)), None
+)
+
+
+if not fc_command:
+    print(
+        f"Neither of the following commands are available: {', '.join(FREECAD_COMMANDS)}"
+    )
+    exit(1)
+
+command = f"{fc_command} cli.py {' '.join(sys.argv[1:])}"
+
 
 output = subprocess.getoutput(command)
 
