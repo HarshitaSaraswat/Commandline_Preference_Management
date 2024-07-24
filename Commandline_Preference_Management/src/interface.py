@@ -13,10 +13,13 @@ from .base import CommandLineInterface
 class PreferenceManagementInterface(CommandLineInterface):
 
     def for_add_preference(self):
-        return self.args.mode == "create" and all(
-            [self.args.name, self.args.value, self.args.dtype]
-        ) or (self.args.mode == "create" and all([self.args.name, self.args.dtype]) and self.args.value==0)
-
+        return (
+            self.args.mode == "create"
+            and all([self.args.name, self.args.value, self.args.dtype])
+            or self.args.mode == "create"
+            and all([self.args.name, self.args.dtype])
+            and self.args.value==0
+        )
     def for_get_preference(self):
         return (
             self.args.mode == "read"
@@ -37,9 +40,13 @@ class PreferenceManagementInterface(CommandLineInterface):
         )
 
     def for_update_preference(self):
-        return self.args.mode == "update" and all(
-            [self.args.name, self.args.value, self.args.dtype]
-        ) or (self.args.mode == "create" and all([self.args.name, self.args.dtype]) and self.args.value==0)
+        return (
+            self.args.mode == "update"
+            and all([self.args.name, self.args.value, self.args.dtype])
+            or self.args.mode == "update"
+            and all([self.args.name, self.args.dtype])
+            and self.args.value==0
+        )
 
     def for_delete_preference(self):
         return (
