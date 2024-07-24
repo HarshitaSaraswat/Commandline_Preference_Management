@@ -1,10 +1,12 @@
-import sys
 from flags import START_FLAG, ERROR_FLAG, EXIT_FLAG
 
-
 def main():
-    from Commandline_Preference_Management.src.interface import CommandLineInterface
-    cli = CommandLineInterface(sys.argv[1:])
+    from Commandline_Preference_Management.src.interface import PreferenceManagementInterface
+    args=[]
+
+    with open("share", "r") as f:
+        saved_interface_args = f.readline().split()
+    cli = PreferenceManagementInterface(args=saved_interface_args)
     cli.run()
 
 try:

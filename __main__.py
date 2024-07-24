@@ -1,14 +1,14 @@
 import subprocess
 import sys
 import shutil
+from Commandline_Preference_Management.src.base import CommandLineInterface
 from flags import START_FLAG, ERROR_FLAG, EXIT_FLAG
 
-FREECAD_COMMANDS = ("freecadcmd", "FreeCADCmd")
+FREECAD_COMMANDS = ("FreeCADCmd", "freecadcmd")
 
 fc_command = next(
     (command for command in FREECAD_COMMANDS if shutil.which(command)), None
 )
-
 
 if not fc_command:
     print(
@@ -16,9 +16,14 @@ if not fc_command:
     )
     exit(1)
 
-command = f"{fc_command} cli.py {' '.join(sys.argv[1:])}"
 
+cli_args = sys.argv[1:]
+c = CommandLineInterface(args=cli_args)
 
+with open("share", "w") as f:
+    f.write(" ".join(cli_args))
+
+command = f"{fc_command} cli.py"
 output = subprocess.getoutput(command)
 
 output = output.split(START_FLAG)[-1]

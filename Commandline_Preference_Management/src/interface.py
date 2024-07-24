@@ -1,5 +1,3 @@
-from argparse import ArgumentParser
-
 from .commands import (
     AddPreference,
     DeletePreference,
@@ -8,27 +6,16 @@ from .commands import (
     ListPreferences,
     UpdatePreference,
 )
-from .constants import DType, Scope
 from .invoker import PreferenceCommandInvoker
+from .base import CommandLineInterface
 
 
-class CommandLineInterface(ArgumentParser):
-    def __init__(self, args):
-        super().__init__(description="Commandline Preference Management")
-        self.add_argument("mode", choices=["create", "read", "update", "delete"])
-        self.add_argument("parameter_group_path")
-        self.add_argument("-s", "--scope", choices=Scope, default=Scope.User)
-        self.add_argument("-n", "--name")
-        self.add_argument("-v", "--value")
-        self.add_argument("-d", "--dtype", choices=DType)
-
-        # print("CommandLineInterface using args:", args)
-        self.args = self.parse_args(args[1:])
+class PreferenceManagementInterface(CommandLineInterface):
 
     def for_add_preference(self):
         return self.args.mode == "create" and all(
             [self.args.name, self.args.value, self.args.dtype]
-        )
+        ) or (self.args.mode == "create" and all([self.args.name, self.args.dtype]) and self.args.value==0)
 
     def for_get_preference(self):
         return (
@@ -52,7 +39,7 @@ class CommandLineInterface(ArgumentParser):
     def for_update_preference(self):
         return self.args.mode == "update" and all(
             [self.args.name, self.args.value, self.args.dtype]
-        )
+        ) or (self.args.mode == "create" and all([self.args.name, self.args.dtype]) and self.args.value==0)
 
     def for_delete_preference(self):
         return (
