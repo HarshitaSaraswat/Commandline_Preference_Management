@@ -5,8 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "freecad-preference-manager"
 version = "1.0.0"
-description = "A description of your CLI tool"
+description = " Command-line utility tool to manage and manipulate FreeCAD preferences from outside the FreeCAD application"
+authors = [
+  {name = "Harshita Saraswat", email = "harshitasaraswat20@example.com"}
+]
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.8"
 
 [project.scripts]
