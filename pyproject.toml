@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freecad-preference-manager"
+version = "1.0.0"
+description = "A description of your CLI tool"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.scripts]
+freecad-preference-manager = "freecad_preference_manager:cli"  # Replace 'tool' with the actual module name and function
