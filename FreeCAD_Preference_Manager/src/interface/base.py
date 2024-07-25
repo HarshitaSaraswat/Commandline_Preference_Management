@@ -1,6 +1,6 @@
 import contextlib
 from argparse import ArgumentParser
-from .constants import DType, Scope
+from ..constants import DType, Scope
 
 
 class CommandLineInterface(ArgumentParser):

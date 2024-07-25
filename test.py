@@ -3,9 +3,9 @@ import sys
 sys.path.append(r"C:\Program Files\FreeCAD 0.21\bin")
 import FreeCAD
 
-from Commandline_Preference_Management.src.commands import GetContent, GetPreference, AddPreference, UpdatePreference, DeletePreference, ListPreferences
-from Commandline_Preference_Management.src.constants import Scope, DType
-from Commandline_Preference_Management.src.invoker import PreferenceCommandInvoker
+from FreeCAD_Preference_Manager.src.commands import GetContent, GetPreference, AddPreference, UpdatePreference, DeletePreference, ListPreferences
+from FreeCAD_Preference_Manager.src.constants import Scope, DType
+from FreeCAD_Preference_Manager.src.invoker import PreferenceCommandInvoker
 
 invoker = PreferenceCommandInvoker(
     verbose=True,

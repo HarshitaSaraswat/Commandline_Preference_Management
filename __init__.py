@@ -1,0 +1,1 @@
+from FreeCAD_Preference_Manager import run

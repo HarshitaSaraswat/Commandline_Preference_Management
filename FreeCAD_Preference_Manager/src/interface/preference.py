@@ -1,4 +1,4 @@
-from .commands import (
+from ..commands import (
     AddPreference,
     DeletePreference,
     GetContent,
@@ -6,7 +6,7 @@ from .commands import (
     ListPreferences,
     UpdatePreference,
 )
-from .invoker import PreferenceCommandInvoker
+from ..invoker import PreferenceCommandInvoker
 from .base import CommandLineInterface
 
 

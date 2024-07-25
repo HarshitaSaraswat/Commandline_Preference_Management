@@ -14,4 +14,4 @@ license = {file = "LICENSE"}
 requires-python = ">=3.8"
 
 [project.scripts]
-freecad-preference-manager = "freecad_preference_manager:cli"  # Replace 'tool' with the actual module name and function
+freecad-preference-manager = "FreeCAD_Preference_Manager:run"
