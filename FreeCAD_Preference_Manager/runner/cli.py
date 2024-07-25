@@ -10,7 +10,7 @@ from FreeCAD_Preference_Manager.src.interface.preference import PreferenceManage
 def main():
     args = retrive_args()
     cli = PreferenceManagementInterface(args=args)
-    cli.run()
+    print(cli._run())
 
 try:
     print(START_FLAG)
