@@ -1,11 +1,13 @@
 import sys
+from pathlib import Path
 
 sys.path.append(r"C:\Program Files\FreeCAD 0.21\bin")
-import FreeCAD
+WORKING_DIR = Path(__file__).parent.parent
+sys.path.append(str(WORKING_DIR))
 
-from FreeCAD_Preference_Manager.src.commands import GetContent, GetPreference, AddPreference, UpdatePreference, DeletePreference, ListPreferences
-from FreeCAD_Preference_Manager.src.constants import Scope, DType
-from FreeCAD_Preference_Manager.src.invoker import PreferenceCommandInvoker
+from src.commands import GetContent, GetPreference, AddPreference, UpdatePreference, DeletePreference, ListPreferences
+from src.constants import Scope, DType
+from src.invoker import PreferenceCommandInvoker
 
 invoker = PreferenceCommandInvoker(
     verbose=True,
