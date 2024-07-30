@@ -40,6 +40,8 @@ def run():
         output = output.split(ERROR_FLAG)[-1]
         print(output)
         exit(1)
+
+    output = output.replace('\n', '')
         
     print(output)
     exit(0)
