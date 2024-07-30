@@ -43,5 +43,5 @@ def run():
 
     output = output.replace('\n', '')
         
-    print(output)
+    print(output, end='')
     exit(0)

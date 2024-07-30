@@ -1,6 +1,6 @@
 [ ] FEAT: Parameter path existance check
 
-[ ] BUG: Don't return none for the commands that are not supposed to run anything
+[x] BUG: Don't return none for the commands that are not supposed to run anything
 
 [x] BUG: Resolve the extra new lines in output 
 

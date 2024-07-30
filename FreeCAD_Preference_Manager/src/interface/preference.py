@@ -107,7 +107,9 @@ class PreferenceManagementInterface(CommandLineInterface):
         return command
 
     def run(self):
-        print(self._run())
+        output = self._run()
+        if output is None: return
+        print(output)
 
     def _run(self):
         command = self.detect_command()
