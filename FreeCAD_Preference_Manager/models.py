@@ -52,7 +52,7 @@ class FCParamGroup:
     def __init__(self, scope: Scope, path: str) -> None:
         if ":" in path:
             raise ValueError(
-                "Group Path cannot contain ':', : is reserved for separating group and parameter name"
+                "Group Path cannot contain ':', ':' is reserved for separating group and parameter name"
             )
         self.scope: Scope = scope
         self.__groups: dict[str, FCParamGroup] = {}
