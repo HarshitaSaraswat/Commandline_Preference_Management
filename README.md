@@ -72,7 +72,7 @@ The following example gives a simple demonstration of how to change the cursor o
 #### 1. read preferences for `PythonConsole`:
 ```shell
 freecad-preference-manager list BaseApp/Preferences/PythonConsole
->>> [('Boolean', 'PythonWordWrap', True), ('Boolean', 'PythonBlockCursor', True), ('Boolean', 'SavePythonHistory', False)]
+>>> [('Boolean', 'PythonWordWrap', True), ('Boolean', 'PythonBlockCursor', False), ('Boolean', 'SavePythonHistory', False)]
 ```
 > This command outputs the `list` of `tuples` for each preference present.
 

@@ -35,8 +35,6 @@ else:
     sys.exit(1)
 
 
-print(os_name)
-print(fc_path)
 sys.path.append(str(fc_path))
 
 from .interface import PreferenceManagementInterface
