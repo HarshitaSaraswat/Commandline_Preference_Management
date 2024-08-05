@@ -1,4 +1,4 @@
-[ ] FEAT: Parameter path existance check
+[x] FEAT: Parameter path existance check
 
 [x] BUG: Don't return none for the commands that are not supposed to run anything
 
@@ -8,5 +8,5 @@
 
 [ ] FEAT: Add parameter search functionality
 
-[ ] FEAT: Tab completion
+[x] FEAT: Tab completion
 
