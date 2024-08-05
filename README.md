@@ -9,7 +9,7 @@ The FreeCAD Preference Manipulation CLI Tool will be designed to streamline the 
 
 ### Installation
 ```shell
-pip install git+()
+pip install git+https://github.com/HarshitaSaraswat/Commandline_Preference_Management.git
 ```
 
 ### Autocomplete
