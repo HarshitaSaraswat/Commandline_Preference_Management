@@ -1,28 +1,36 @@
 # Commandline Preference Management
+The FreeCAD Preference Manipulation CLI Tool will be designed to streamline the customization of FreeCAD directly from the command line interface, eliminating the need for complex graphical interfaces. It will facilitate the management of FreeCAD's preferences, enabling users to perform various tasks such as modifying existing configurations, accessing preferences stored in files, and removing unnecessary settings. Whether users are adjusting preferences for personal use or system-wide configurations, this tool will offer comprehensive control. Users will be able to swiftly create tailored preferences and make precise adjustments without the inconvenience of additional GUIs, enhancing workflow efficiency.
 
-### Available Commands
-- GetContent
-- GetPreference
-- AddPreference
-- UpdatePreference
-- DeletePreference
-- ListPreferences
+## Installation
 
-## Instalation
-1. Clone this repository
-2. Make sure that you have FreeCAD installed
+### Pre-requisites
+1. Python 3.11+
+1. **FreeCAD** installed and `FreeCADCmd` or `freecadcmd` commands available in the system path.
+
+### Installation
+```shell
+pip install git+()
+```
+
+### Autocomplete
+If you want to activate autocomplete for the commandline tool, you can follow the below steps:
+1. `argcomplete` package is installed with it but needs to be activated with the following command:
+```shell
+activate-global-python-argcomplete
+```
+2. Add the line below to your .bashrc (or equivalent shell)
+```shell
+eval "$(register-python-argcomplete freecad-preference-manager)"
+source ~/.bashrc
+```
 
 ### To Run
 ```shell
 cd Commandline_Preference_Management
-python . arg1 arg2...
+freecad-preference-manager arg1 arg2...
 ```
 
-```shell
-usage: . {create, read, update, delete} parameter_group_path [-h] [-s {User,Global}] [-n NAME] [-v VALUE] [-d {Bool,Float,Int,String,Unsigned}] 
-```
-
-Use `python . -h` to learn about all the available options in detail.
+Use `freecad-preference-manager -h` to learn about all the available options in detail.
 
 ---
 
@@ -31,27 +39,28 @@ Use `python . -h` to learn about all the available options in detail.
 Different combinations of options can be used to execute different commands. These combilations are listed below:
 - GetContent
 ```shell
-python . read parameter_group_path
-```
-- GetPreference
-```shell
-python . read parameter_group_path -d type_of_preference -n preference_name
-```
-- AddPreference
-```shell
-python . create parameter_group_path -d type_of_preference -n preference_name -v value_of_preference
-```
-- UpdatePreference
-```shell
-python . update parameter_group_path -d type_of_preference -n preference_name -v value_of_preference
-```
-- DeletePreference
-```shell
-python . delete parameter_group_path -d type_of_preference -n preference_name
+freecad-preference-manager list parameter_group_path
 ```
 - ListPreferences
 ```shell
-python . read parameter_group_path -d type_of_preference
+freecad-preference-manager list parameter_group_path -d type_of_preference
+```
+
+- GetPreference
+```shell
+freecad-preference-manager read parameter_group_path:preference_name
+```
+- AddPreference
+```shell
+freecad-preference-manager create parameter_group_path:preference_name -d type_of_preference -v value_of_preference
+```
+- UpdatePreference
+```shell
+freecad-preference-manager update parameter_group_path:preference_name -v value_of_preference
+```
+- DeletePreference
+```shell
+freecad-preference-manager delete parameter_group_path:preference_name
 ```
 
 ---
@@ -62,47 +71,40 @@ The following example gives a simple demonstration of how to change the cursor o
 
 #### 1. read preferences for `PythonConsole`:
 ```shell
-python . update BaseApp/Preferences/PythonConsole
+freecad-preference-manager list BaseApp/Preferences/PythonConsole
 >>> [('Boolean', 'PythonWordWrap', True), ('Boolean', 'PythonBlockCursor', True), ('Boolean', 'SavePythonHistory', False)]
 ```
 > This command outputs the `list` of `tuples` for each preference present.
 
-> Tuple represents: `(datatype, property name, value)` _(in that particular order)_ 
+> Tuple represents: `(datatype, property name, value)` _(in that particular order)_
 
 
 #### 2. update the value of `PythonBlockCursor`:
 ```shell
-python . update BaseApp/Preferences/PythonConsole -d Bool -n PythonBlockCursor -v true
->>> None
+freecad-preference-manager update BaseApp/Preferences/PythonConsole:PythonBlockCursor -v true
 ```
-> Right now this command returns `None` on successful execution
 
 #### 3. create a new preference named `InterpreterPath`:
 > **NOTE:** creating a random preference would not have any effect in FreeCAD. `InterpreterPath` is such a preference which is used here just for giving example.
 ```shell
-python . create BaseApp/Preferences/PythonConsole -d String -n InterpreterPath -v path/of/python.exe
->>> None
+freecad-preference-manager create BaseApp/Preferences/PythonConsole:InterpreterPath -d String -v path/of/python.exe
 ```
-> Right now this command returns `None` on successful execution
-
 
 #### 4. read any particular value of the preference:
 ```shell
-python . read BaseApp/Preferences/PythonConsole -d String -n InterpreterPath
+freecad-preference-manager read BaseApp/Preferences/PythonConsole:InterpreterPath
 >>> False
 ```
 > This command just returns the value or the provides preference name
 
 #### 5. listing all the `Boolean` preferences in `BaseApp/Preferences/PythonConsole`
 ```shell
-python . read BaseApp/Preferences/PythonConsole -d Bool
+freecad-preference-manager list BaseApp/Preferences/PythonConsole -d Bool
 >>> ['PythonWordWrap', 'PythonBlockCursor', 'SavePythonHistory']
 ```
 > This command returns a `list` of the names of the parameters
 
 #### 6. removing a parameter:
 ```shell
-python . delete BaseApp/Preferences/PythonConsole -d String -n InterpreterPath
->>> None
+freecad-preference-manager delete BaseApp/Preferences/PythonConsole:InterpreterPath
 ```
-> Right now this command returns `None` on successful execution
