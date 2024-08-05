@@ -1,4 +1,14 @@
-# Commandline Preference Management
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  
+  <a href="https://github.com/HarshitaSaraswat/Commandline_Preference_Management">
+    <img src="https://i0.wp.com/blog.freecad.org/wp-content/uploads/2024/06/square-256.png?resize=150%2C150&ssl=1" alt="Logo" width="80" height="80">
+  </a>
+  <h1 align="center">Commandline Preference Management</h3>
+
+</div>
+
 The FreeCAD Preference Manipulation CLI Tool will be designed to streamline the customization of FreeCAD directly from the command line interface, eliminating the need for complex graphical interfaces. It will facilitate the management of FreeCAD's preferences, enabling users to perform various tasks such as modifying existing configurations, accessing preferences stored in files, and removing unnecessary settings. Whether users are adjusting preferences for personal use or system-wide configurations, this tool will offer comprehensive control. Users will be able to swiftly create tailored preferences and make precise adjustments without the inconvenience of additional GUIs, enhancing workflow efficiency.
 
 ## Installation
@@ -72,6 +82,9 @@ The following example gives a simple demonstration of how to change the cursor o
 #### 1. read preferences for `PythonConsole`:
 ```shell
 freecad-preference-manager list BaseApp/Preferences/PythonConsole
+```
+output:
+```shell
 >>> [('Boolean', 'PythonWordWrap', True), ('Boolean', 'PythonBlockCursor', False), ('Boolean', 'SavePythonHistory', False)]
 ```
 > This command outputs the `list` of `tuples` for each preference present.
@@ -93,6 +106,9 @@ freecad-preference-manager create BaseApp/Preferences/PythonConsole:InterpreterP
 #### 4. read any particular value of the preference:
 ```shell
 freecad-preference-manager read BaseApp/Preferences/PythonConsole:InterpreterPath
+```
+output:
+```shell
 >>> False
 ```
 > This command just returns the value or the provides preference name
@@ -100,6 +116,9 @@ freecad-preference-manager read BaseApp/Preferences/PythonConsole:InterpreterPat
 #### 5. listing all the `Boolean` preferences in `BaseApp/Preferences/PythonConsole`
 ```shell
 freecad-preference-manager list BaseApp/Preferences/PythonConsole -d Bool
+```
+output:
+```shell
 >>> ['PythonWordWrap', 'PythonBlockCursor', 'SavePythonHistory']
 ```
 > This command returns a `list` of the names of the parameters
