@@ -1,4 +1,4 @@
-from FreeCAD_Preference_Manager import run
+from freecad_preference_manager import main
 
 if __name__ == "__main__":
-    run()
+    main()

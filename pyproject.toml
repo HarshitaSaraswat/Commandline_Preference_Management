@@ -12,6 +12,9 @@ authors = [
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.8"
+dependencies = [
+  'argcomplete'
+]
 
 [project.scripts]
-freecad-preference-manager = "FreeCAD_Preference_Manager:run"
+freecad-preference-manager = "freecad_preference_manager:main"

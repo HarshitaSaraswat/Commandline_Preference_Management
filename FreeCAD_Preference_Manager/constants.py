@@ -17,11 +17,18 @@ class DType(str, Enum):
 
     The DType class defines the possible data types for preference commands, such as Bool, Float, Int, String, and Unsigned.
     """
-    Bool = "Bool"
+    Bool = "Boolean"
     Float = "Float"
-    Int = "Int"
+    Int = "Integer"
     String = "String"
-    Unsigned = "Unsigned"
-
+    Unsigned = "Unsigned Long"
 
 FCTypes = Union[bool, float, int, str]
+
+FC_TYPE_MAP = {
+    "Boolean": bool,
+    "Integer": int,
+    "String": str,
+    "Unsigned Long": int,
+    "Float": float,
+}
